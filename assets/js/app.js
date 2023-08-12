@@ -18,7 +18,7 @@ const loading = (estado) => {
 const manipularData = (data) => {
     const characters = data.results;
 
-    console.table(characters, ['id', 'name', 'species', 'image', 'url']);
+    // console.table(characters, ['id', 'name', 'species', 'image', 'url']);
 
     const seccionCards = document.querySelector('#cards-dinamicas');
     const seccionCardsTemplate = document.querySelector('#card-dinamica-tamplate').content;
@@ -39,9 +39,7 @@ const manipularData = (data) => {
 
     seccionCards.appendChild(fragmentCards);
 
-    // Operador de fusión null
-    previous.href = (data.info.prev) ?? '#';
-    next.href = (data.info.next) ?? '#';
+    paginar(data.info);
 };
 
 // ------------------ Petición a la API de Rick y Morty
@@ -61,8 +59,29 @@ const renderCards = async (url) => {
 };
 
 // ------------------ Paginar
-const paginar = () => {
-    
+const paginar = (data) => {
+    console.log(data);
+
+    const paginationSection = document.querySelector('#pagination');
+    const paginationTemplate = document.querySelector('#pagination-template').content;
+
+    const clonPaginationTemplate = paginationTemplate.cloneNode(true);
+    const paginationButtons = clonPaginationTemplate.querySelectorAll('button');
+
+    // ------------------ Si es la primera o la última página, se desactiva el botón
+    paginationButtons.forEach(button => {
+        if((button.dataset.botonPaginacion === 'prev' && !data.prev) 
+        || (button.dataset.botonPaginacion === 'next' && !data.next)) {
+            // ------------------ Forma standard de desactivar el botón
+            button.disabled = true;
+
+            // ------------------ Forma rebuscada
+            // button.setAttribute('disabled', '');
+        }
+    });
+
+    // ------------------ Al solo ser un clon, no se necesita fragment
+    paginationSection.appendChild(clonPaginationTemplate);
 };
 
 // Delegación de eventos
