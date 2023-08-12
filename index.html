@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rick y Morty</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+</head>
+<body>
+    <div class="container my-5">
+        <!-- Contenido principal -->
+        <main>
+            <!-- Spinner cargando -->
+            <section class="d-flex align-items-center cargando d-none">
+                <strong role="status">Cargando...</strong>
+                <div class="spinner-border ms-auto" aria-hidden="true"></div>
+            </section>
+            <!-- Cards -->
+            <section class="row" id="cards-dinamicas"></section>
+        </main>
+
+        <footer id="links-pagination">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                      <span aria-hidden="true" aria-label="Previous">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true" aria-label="Next">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+            </nav>
+        </footer>
+    </div>
+
+    <!-- Templates -->
+    <template id="card-dinamica-tamplate">
+        <!-- Pantalla pequeña todo el espacio, pantalla mediana dos columnas y grantes 4 -->
+        <article class="col-12 col-md-6 col-lg-3 mb-3">
+            <!-- style="width: 18rem;" Esto viene por defecto en la card, eliminarlo -->
+            <div class="card text-center shadow">
+                <img src="https://rickandmortyapi.com/api/character/avatar/1.jpeg" class="card-img-top" alt="Imagen del personaje">
+                <div class="card-body">
+                    <h5 class="card-title text-primary lead">Nombre del personaje</h5>
+                    <p class="lead text-secondary">Raza del personaje</p>
+                    <a href="#" class="btn btn-primary" target="_blank">URL</a>
+                </div>
+            </div>
+        </article>
+    </template>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
