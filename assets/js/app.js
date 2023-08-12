@@ -65,20 +65,34 @@ const paginar = (data) => {
     const paginationSection = document.querySelector('#pagination');
     const paginationTemplate = document.querySelector('#pagination-template').content;
 
-    const clonPaginationTemplate = paginationTemplate.cloneNode(true);
+    const clonPaginationTemplate = paginationTemplate.firstElementChild.cloneNode(true);
     const paginationButtons = clonPaginationTemplate.querySelectorAll('button');
 
-    // ------------------ Si es la primera o la última página, se desactiva el botón
     paginationButtons.forEach(button => {
+        // ------------------ Si es la primera o la última página, se desactiva el botón
         if((button.dataset.botonPaginacion === 'prev' && !data.prev) 
         || (button.dataset.botonPaginacion === 'next' && !data.next)) {
-            // ------------------ Forma standard de desactivar el botón
             button.disabled = true;
-
-            // ------------------ Forma rebuscada
-            // button.setAttribute('disabled', '');
         }
+        
+        // ------------------ Revertir el efecto de desactivado
+        if((button.dataset.botonPaginacion === 'prev' && data.prev) 
+        || (button.dataset.botonPaginacion === 'next' && data.next)) {
+            button.disabled = false;
+
+            if(button.dataset.botonPaginacion === 'prev') {
+                button.dataset.url = data.prev;
+            }
+
+            if(button.dataset.botonPaginacion === 'next') {
+                button.dataset.url = data.next;
+            }
+        }
+
+        console.log(button.dataset.url);
     });
+
+    paginationSection.textContent = '';
 
     // ------------------ Al solo ser un clon, no se necesita fragment
     paginationSection.appendChild(clonPaginationTemplate);
@@ -92,4 +106,12 @@ document.addEventListener('DOMContentLoaded', (e) => {
     const url = 'https://rickandmortyapi.com/api/character';
 
     renderCards(url);
+});
+
+document.addEventListener('click', (e) => {
+    const fuenteEvento = e.target;
+
+    if(fuenteEvento.dataset.botonPaginacion === 'prev' || fuenteEvento.dataset.botonPaginacion === 'next') {
+        renderCards(fuenteEvento.dataset.url);
+    }
 });
