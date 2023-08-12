@@ -21,29 +21,17 @@
                 <strong role="status">Cargando...</strong>
                 <div class="spinner-border ms-auto" aria-hidden="true"></div>
             </section>
+
+            <!-- Paginación -->
+            <div id="pagination"></div>
+
             <!-- Cards -->
             <section class="row" id="cards-dinamicas"></section>
         </main>
-
-        <footer id="links-pagination">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                      <span aria-hidden="true" aria-label="Previous">&laquo;</span>
-                    </a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                      <span aria-hidden="true" aria-label="Next">&raquo;</span>
-                    </a>
-                  </li>
-                </ul>
-            </nav>
-        </footer>
     </div>
 
     <!-- Templates -->
+    <!-- Cards -->
     <template id="card-dinamica-tamplate">
         <!-- Pantalla pequeña todo el espacio, pantalla mediana dos columnas y grantes 4 -->
         <article class="col-12 col-md-6 col-lg-3 mb-3">
@@ -57,6 +45,14 @@
                 </div>
             </div>
         </article>
+    </template>
+
+    <!-- Paginación -->
+    <template id="pagination-template">
+        <section class="my-3 d-flex justify-content-between">
+            <button class="btn btn-outline-primary">Prev</button>
+            <button class="btn btn-outline-primary">Next</button>
+        </section>
     </template>
 
     <script

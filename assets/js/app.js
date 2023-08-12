@@ -1,7 +1,3 @@
-// ------------------ Paginación
-const previous = document.querySelector('#links-pagination a[aria-label="Previous"]');
-const next = document.querySelector('#links-pagination a[aria-label="Next"]');
-
 // ------------------ Funciones
 //
 // ------------------ Spinner de carga
@@ -64,37 +60,9 @@ const renderCards = async (url) => {
     }
 };
 
-// ------------------ Devolver URL de paginación
-const getURLPaginate = (fuenteEvento, control) => {
-    let url = '';
-
-    if((fuenteEvento.getAttribute('href') === '#')) {
-        url = 'https://rickandmortyapi.com/api/character';
-    }
-    else if(!fuenteEvento.getAttribute('href') && control == 'Previous') {
-        if(previous.getAttribute('href') === '#') {
-            return;
-        }
-        url = previous.href;
-    }
-    else if(!fuenteEvento.getAttribute('href') && control == 'Next') {
-        if(next.getAttribute('href') === '#') {
-            return;
-        }
-        url = next.href;
-    }
-    else {
-        url = fuenteEvento.href;
-    }
-
-    return url;
-};
-
 // ------------------ Paginar
-const paginar = (fuenteEvento, control) => {
-    const url = getURLPaginate(fuenteEvento, control);
-
-    renderCards(url);
+const paginar = () => {
+    
 };
 
 // Delegación de eventos
@@ -105,16 +73,4 @@ document.addEventListener('DOMContentLoaded', (e) => {
     const url = 'https://rickandmortyapi.com/api/character';
 
     renderCards(url);
-});
-
-// ------------------ Hacer click
-document.addEventListener('click', (e) => {
-    const fuenteEvento = e.target;
-
-    if((fuenteEvento.getAttribute('aria-label') === 'Previous')
-    || (fuenteEvento.getAttribute('aria-label') === 'Next')){
-        e.preventDefault();
-
-        paginar(fuenteEvento, fuenteEvento.getAttribute('aria-label'));
-    }
 });
